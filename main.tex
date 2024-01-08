@@ -54,14 +54,46 @@ Complémentaire à PAIMAS, la norme \textit{Producer-Archive Interface Specifica
 
 On voit donc que le CCSDS a élaboré un ensemble de normes ayant vocation à fonctionner ensemble pour mettre en oeuvre OAIS. Cependant, d'autres organismes ont également élaboré des normes compatibles. 
 
-La plus couramment citée dans la littérature européennes est METS. Cette norme a été élaboré dès 2001, soit avant la publication du modèle OAIS, par un groupe d'experts issus de la communauté de la Librairie du Congrès. Dès 2006, les Archives de France démarre l'élaboration d'un modèle d'échange de données pour l'archivage. Ce travail donne lieu à la publication en 2014 de la norme MEDONA (Modélisation des échanges de données pour l'archivage)\footnote{norme AFNOR NF Z 44-022}.MEDONA est plus tard adaptée pour permettre son adoption à l'international et en dehors du secteur public et paraît en 2017 en tant que "\textit{Data exchange protocol for interoperability and preservation} (DEPIP)\footnote{sous la référence ISO 20614:2017}.
+La plus couramment citée dans la littérature européennes est METS. Cette norme a été élaboré dès 2001, soit avant la publication du modèle OAIS, par un groupe d'experts issus de la communauté de la Librairie du Congrès. Dès 2006, les Archives de France démarre l'élaboration d'un modèle d'échange de données pour l'archivage. Ce travail donne lieu à la publication en 2014 de la norme MEDONA (Modélisation des échanges de données pour l'archivage)\footnote{norme AFNOR NF Z 44-022}.MEDONA est plus tard adaptée pour permettre son adoption à l'international et en dehors du secteur public et paraît en 2017 en tant que "\textit{Data exchange protocol for interoperability and preservation} (DEPIP)\footnote{sous la référence ISO 20614:2017}.Contrairement aux normes PAIMAS et PAIS (et à son outil associé XDFU), MEDONA (et DEPIP) ne se focalise pas uniquement sur le processus d'ingestion des données, mais couvre différentes situations d'échange de données (transfert, livraison, destruction, archivage et stockage) et définit des scénarios d'usage. La norme inclut des diagrammes d'activité, des modèles de données en UML et des schémas XML pour l'échange de données. Contrairement à PAIS, MODENA ne spécifie pas comment et avec quel format d''empaquetage les objets numériques doivent être transférés avec leurs métadonnées\autocite{grimouard_data_2014}. 
 
 
-\section{Les paquets d'informations dans l'OAIS}
+\section{Le concept de "paquet d'information"}
+Avant de plonger plus en détail sur l'usage de METS et de XFDU pour l'empaquetage des information à archiver, il est nécessaire de définir la notion de "paquet d'information" et de la situer au sein du modèle de données décrit dans l'OAIS. 
+
+L'empaquetage d'information consiste à établir des liens entre un ensemble de données et les métadonnées qui les décrivent. L'empaquetage est important pour assurer une interprétation et une exploitation des données à la fois par les humains et les machines. Le "paquet d'information" est un des concepts clés du modèle OAIS. Il s'agit d'une entité logique qui regroupe les données à archiver et les métadonnées associées, permettant ainsi de garantir leur intelligibilité, leur authenticité, leur accessibilité et leur pérennité. Les paquets d'information sont en quelques sorte la "matière première" du système puisque c'est grâce à et sur ces paquets d'informations que seront appliqués les différentes fonctionnalités du système d'archivage. 
+
+Le modèle de données décrit dans l'OAIS établit une distinction entre les différents paquets d'information selon leur statut au sein du processus de gestion archivistique. Il existe ainsi trois types de paquets d'informations  :
+- Le paquet d'informations de soumission (SIP) : il correspond à l'objet numérique fourni par le producteur à l'archive, accompagné des métadonnées nécessaires à son identification, sa description, sa validation et son ingestion.
+- Le paquet d'informations archivistiques (AIP) : il correspond à l'objet numérique stocké dans l'archive, après avoir été transformé et enrichi par le processus d'ingestion. Il contient les métadonnées descriptives, techniques, administratives et de préservation relatives aux données archivées.
+- Le paquet d'informations de diffusion (DIP) : il correspond à l'objet numérique fourni par l'archive à l'utilisateur, après avoir été extrait et adapté par le processus d'accès. Il contient les métadonnées nécessaires à la compréhension et à l'utilisation des données diffusées (\cite{giaretta_advanced_2011}).
+
+La norme OAIS ne fournit une description détaillée que pour l'AIP. C'est en effet l'AIP qui est au centre des opérations de l'OAIS. 
+L'image ci-dessous présente l'ensemble des éléments qu'un AIP inclut\footnote{Image provenant de \cite{giaretta_advanced_2011}, p.62}. 
+
+\includegraphics[width=0.95\textwidth]{Full_AIP_package}.
+
+D'un point de vue logique, chaque paquet d'information est décrit et identifié en tant qu'ensemble particulier (par le\textit{Package Description}. Son contenu est constitué de deux grandes catégories de données : le CDO ou \textit{Content Data Object}, qui regroupe les données à préserver, et le PDI ou \textit{Preservation Description Information}, qui rassemble les informations nécessaires pour assurer la conservation du CDO. Chacun est son tour constitué de différents éléments. Le CDO contient le \textit{data object}, qui est le contenu informationnel que l'on souhaite conserver, et l'information de représentation, qui regroupe les informations nécessaire à l'interprétation correcte du \textit{data object}. Le PDI contient cinq catégories qui permettent de référencer les données, de connaître leur provenance, leur contexte, leur intégrité et les règles d'accès qui doivent être respectées. Étant donné la complexité et la multiplicité des informations potentiellement contenues dans un paquet, il est essentiel d'identifier ses différentes parties et d'établir des liens entre celles-ci. 
+
 
 \section{Formats d'empaquetage}
-
+Les formats METS et XFDU sont deux manières différentes d'utiliser des schémas XML afin de structurer et décrire des paquets d'information. 
 \subsection{METS}
+METS est créé en 2001 pour encoder les métadonnées descriptives, administratives et structurelles en utilisant l'\textit{ Extensible Markup Language Schema} (XSD). Le projet, développé par la \textit{Digital Library Federation}, est né de la volonté d'étendre son prédécesseur, le projet \textit {Making of America II} (MOA2), qui avait élaboré un \textit{Document Type Definition} (DTD) pour l'encodage des métadonnées, au moment où une version préliminaire de l'OAIS était parue. METS est alors mis au point pour créer les paquets d'information décrits par OAIS (\cite{cantara_mets_2005}, p.236-239). 
+
+METS est composé de sept sections possibles. Après l'en-tête METS (METS Header), qui contient des informations générales sur le document (comme le créateur, le titre, le type, la date, l'identifiant, etc.), on retrouve la racine du schéma qui est le document METS lui-même et qui contient six catégories de métadonnées décrivant le paquet :
+\begin{enumerate}
+    \item La section descriptive (\textit{Descriptive Section}) décrit les caractéristiques de l'objet numérique, comme son contenu, sa structure, son origine, ses droits, etc. Elle peut utiliser différents schémas de métadonnées, comme Dublin Core, MODS, PREMIS, etc.
+    \item La section administrative (\textit{Administrative Section}) fournit des informations techniques sur l'objet numérique, comme son format, sa taille, sa résolution, son empreinte numérique, etc. Elle peut également inclure des informations sur la provenance, la conservation, les droits d'accès, etc.
+    \item Le manifeste des fichiers (\textit{File Section}) liste tous les fichiers qui font partie de l'objet numérique. Il indique leur nom, leur emplacement, leur identifiant et leur type MIME.
+    \item La section de structuration (\textit{Structural Section}) définit la structure logique et physique de l'objet numérique. Elle indique comment les fichiers qui composent l'objet sont organisés et reliés entre eux. Elle peut utiliser différents types de structures, comme hiérarchique, séquentielle, parallèle, etc.
+    \item La section de structuration des liens est un complément à la carte structurelle qui nous permet d'enregistrer les liens qui traversent sa structure hiérarchique.
+    \item La section comportementale (\textit{Behavioral Section}) spécifie les actions ou les services associés à l'objet numérique. Elle peut définir des comportements internes ou externes, comme l'affichage, la lecture, la transformation, la validation, etc.
+\end{enumerate}
+
+METS a été largement adopté pour l'archivage. Son principe est flexible puisqu'il permet l'intégration de toute sorte d''autres standards XML à travers l'usage d'extensions, qui sont intégrées à sa structure ou référencées. Son architecture est conçue pour permettre un empaquetage efficace des informations, en intégrant des catégories de métadonnées clairement distinctes mais bien reliées entre elles par un système d'identifiants et de pointeurs internes qui constituent ensemble un système efficace de représentation des liens entre les métadonnées d'objets numériques complexes \autocite{gartner_metadata_2021}. 
+
+La flexibilité de METS est l'une des principales raisons de son succès selon Katherine Ralson. En effet, étant donné les coûts induits par l'adoption d'un nouveau standard de métadonnées est très élevé et METS permet d'implémenter une stratégie de préservation numérique qui intègre et tire parti de l'ensemble des métadonnées déjà utilisées dans les systèmes de productions et/ou de description des contenus\autocite{ralson_mets_2013}. 
+
 
 \subsection{XFDU}
 
@@ -70,7 +102,5 @@ La plus couramment citée dans la littérature européennes est METS. Cette norm
 
 %% bibliographie
 \printbibliography
-
-\tableofcontents % affiche une table des matières correspondant aux sections du document
 
 \end{document}
