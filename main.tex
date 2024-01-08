@@ -92,13 +92,31 @@ METS est composé de sept sections possibles. Après l'en-tête METS (METS Heade
 
 METS a été largement adopté pour l'archivage. Son principe est flexible puisqu'il permet l'intégration de toute sorte d''autres standards XML à travers l'usage d'extensions, qui sont intégrées à sa structure ou référencées. Son architecture est conçue pour permettre un empaquetage efficace des informations, en intégrant des catégories de métadonnées clairement distinctes mais bien reliées entre elles par un système d'identifiants et de pointeurs internes qui constituent ensemble un système efficace de représentation des liens entre les métadonnées d'objets numériques complexes \autocite{gartner_metadata_2021}. 
 
-La flexibilité de METS est l'une des principales raisons de son succès selon Katherine Ralson. En effet, étant donné les coûts induits par l'adoption d'un nouveau standard de métadonnées est très élevé et METS permet d'implémenter une stratégie de préservation numérique qui intègre et tire parti de l'ensemble des métadonnées déjà utilisées dans les systèmes de productions et/ou de description des contenus\autocite{ralson_mets_2013}. 
+La flexibilité de METS est l'une des principales raisons de son succès selon Katherine Ralson. En effet, étant donné les coûts induits par l'adoption d'un nouveau standard de métadonnées est très élevé et METS permet d'implémenter une stratégie de préservation numérique qui intègre et tire parti de l'ensemble des métadonnées déjà utilisées dans les systèmes de productions et/ou de description des contenus \autocite{ralson_mets_2013}. 
 
 
 \subsection{XFDU}
+La norme XFDU spécifie comment regrouper les données et les métadonnées pour faciliter le transfert et l'archivage des informations. Conforme au modèle OAIS, XFDU a été adopté adoptée par plusieurs agences spatiales, telles que l'ESA (Agence spatiale européenne). 
+
+XFDU fournit un ensemble de catégories et de classifications de métadonnées prédéfinies qui caractérisent le contenu, le contexte, la provenance, la qualité et la préservation des données et des métadonnées du paquet d'information. Il permet de créer des structures hiérarchiques qui lient les données et les métadonnées associées, ainsi que de définir des règles de validation et de transformation. 
+
+Un empaquetage avec XFDU est composé de deux parties principales : le manifeste et le contenu. Le manifeste est un fichier XML qui décrit les métadonnées, les relations et les références des données contenues dans l'empaquetage. Le manifeste suit un schéma XSD qui définit les éléments et les attributs autorisés. Le manifeste contient des informations telles que l'identifiant, le titre, la date, le créateur, le format, la taille, le \textit{checksum} et la localisation des données. Le contenu est l'ensemble des données numériques qui sont empaquetées avec le manifeste. Le contenu peut être de différents types, tels que des fichiers binaires, des fichiers XML, des images, des vidéos, des sons, etc. Le contenu est référencé par le manifeste à travers des URI (\textit{Uniform Resource Identifier}) \autocite{dunckley_using_2010}.
+
+Tous les éléments de contenus dans le paquet d'information sont référencés par le manifeste, qui est constitué de cinq sections : 
+\begin{enumerate}
+\item L'entête (\textit{Header}) contient des informations sur le nom, la version, la date et l'identifiant du manifeste, ainsi que sur l'organisation ou l'entité qui l'a créé.
+\item La section \textit{Information Package Map} décrit la structure hiérarchique du paquet de données, en utilisant des éléments appelés Data Object Pointer pour référencer les objets de données inclus dans le paquet ou accessibles par des liens externes.
+\item La section \textit{Data Object} contient les objets de données eux-mêmes, sous forme de séquences d'octets, ou des références à des sources externes où les objets de données peuvent être trouvés.
+\item La section \textit{Metadata} contient des métadonnées associées aux objets de données ou au paquet dans son ensemble, sous forme d'éléments XML ou de références à des schémas externes.
+\item La section \textit{Behavior} décrit le comportement attendu du paquet de données, c'est-à-dire les actions ou les opérations qui peuvent être effectuées sur le paquet ou ses composants, en utilisant des pointeurs pour référencer des scripts, des programmes ou des services externes.
+\end{enumerate}
+
+XFDU n'a pas encore été largement utilisé par la communauté internationale dans des projets de préservation numérique. La littérature disponible (\autocite{dunckley_using_2010, giaretta_advanced_2011} se fonde sur l'exemple de CASPAR (\textit{Cultural, Artistic and Scientific knowledge for Preservation, Access and Retrieval}), un projet financé par la Commission européenne qui s'est déroulé de 2006 à 2009. Son l'objectif était de développer des méthodes et des outils pour préserver et accéder aux données numériques culturelles, artistiques et scientifiques \footnote{\href{https://www.casparpreserves.eu/}{Voyez le site du projet}}.
+
+Au sein du projet CASPAR, XFDU était l'un des trois conteneurs envisagés pour empaqueter les informations. Les deux autres étaient METS et MPEGS-21. XFDU a été choisi car au début du projet, METS n'était pas encore complètement adapté au modèle OAIS, et les partenaires du projet n'avait pas d'expérience passées avec METS contrairement à XFDU qui avait déjà été utilisé par l'Agence spatiale européenne (\cite{dunckley_using_2010}, p. 5). Par ailleurs, le XFDU permet d'inclure des information additionnelles si nécessaire afin de répondre à des besoins spécifiques sans pour autant renoncer à la cohérence de l'ensemble et aux principes de la standardisation (\cite{giaretta_advanced_2011}, p. 194).
 
 \section{Conclusion}
-
+METS et XFDU sont deux usages des schémas XML pour formaliser l'empaquetage de paquets d'information dans le cadre de la conservation à long terme. METS a été plus largement adopté que XFDU dans ce contexte. Ce dernier est surtout connu dans le cadre de la préservation des données spatiales. La popularité de METS tient à son architecture flexible qui rend facile son adoption car il intègre facilement et se combine bien avec les autres standards déjà adoptés par la communauté professionnelle. XFDU de son côté, répond particulièrement aux normes de l'OAIS, mais est davantage adapté à des projets où le besoin en spécialisation est élevé, là où METS permet un usage générique et donc une implémentation dans des projets et plateformes qui agrègent des contenus d'origine et de nature très variées (comme \textit{Europeana}).
 
 %% bibliographie
 \printbibliography
