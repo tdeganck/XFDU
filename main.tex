@@ -1,0 +1,56 @@
+\documentclass[12pt,a4paper]{article} % classe article, taille 12, papier A4
+\usepackage{fontspec} % permet de gérer la police
+
+\usepackage{graphicx} % gère les images
+\usepackage{array} % gère les tableaux
+\usepackage{hyperref} % gère les liens
+\usepackage{csquotes} % gère les citations et les guillemets
+
+\usepackage{polyglossia} % gère l'aspect multilingue des documents
+\setmainlanguage{french} % sélection de la langue principale du document
+
+\usepackage[citestyle=verbose]{biblatex} % appel de biblatex, de nombreuses autres options disponibles
+\bibliography{nom_du_fichier_bib} % appel du fichier .bib sans l'extension
+
+% emplacement pour d'autres packages
+
+\title{L'empaquetage des informations pour leur préservation à long terme} % le titre du document
+\author{Tommy De Ganck} % son auteur
+\date{8 janvier 2024} % la date
+
+
+%% début du document
+
+\begin{document} % début du corps du texte
+
+\maketitle % affiche le titre, l'auteur et la date
+	
+
+\section{Introduction} % présentation de la pertinence, de l'objectif et de la structure de l'article
+Le présent travail s'intéresse aux formats d'empaquetage des informations pour leur préservation à long terme. Dans ce contexte, l'empaquetage consiste à conditionner le contenu à archiver avec les métadonnées qui s'y rapportent. Pour qu'un tel paquet soit identifiable, lisible et donc utilisable, il est nécessaire de décrire la structure du paquet ainsi que les liens entre le contenu archivé (et ses différents éléments), d'une part, et les métadonnées qui leur sont associées, d'autre part. 
+
+L'empaquetage est un élément clé de tout projet d'archivage électronique. En effet, la conservation pérenne des contenus implique de les documenter suffisamment afin d'être capable d'en assurer une gestion optimale dans le temps, d'y effectuer des recherches et d'en permettre la consultation (par virtualisation notamment). Or, les contenus à conserver sont non seulement de plus en plus nombreux, mais également de plus en plus complexes. L'empaquetage des informations à archiver doit donc répondre au double défi d'un encapsulage performant (qui décrit et relie tous les éléments utiles d'une façon structurée) et économique (qui évite les redondances sans compromettre la pérennité des l'accès aux ressources nécessaires). 
+
+Cette question est abordée ici dans le contexte de l'\textit{Open Archival Information System} (OAIS), que l'on peut traduire par "Système ouvert d'archivage d'information". Deux standards d'empaquetage basé sur l'\textit{Extensible Markup Language} (XML) sont présentés et comparés : le \textit{Metadata Encoding and Transmission Standard} (METS) et le \textit{XML Formatted Data Unit} (XFDU). 
+
+Après un bref historique de l'OAIS et des initiatives prises sur le plan international pour organiser son implémentation, j'introduis de façon synthétique le système décrit dans l'OAIS et plus spécifiquement la notion de "paquet d'information". Je présente ensuite successivement les standards METS et XFDU avant d'en esquisser une comparaison en guise de conclusion. 
+
+\section{Contexte} % explication du contexte historique de l'OAIS et des initiatives liées à l'implémentation sur le plan international
+
+\section{Les paquets d'informations dans l'OAIS}
+
+\section{Formats d'empaquetage}
+
+\subsection{METS}
+
+\subsection{XFDU}
+
+\section{Conclusion}
+
+
+%% bibliographie
+\printbibliography
+
+\tableofcontents % affiche une table des matières correspondant aux sections du document
+
+\end{document}
